@@ -1,4 +1,4 @@
-package com.capgemini.bowling;
+package bowling;
 
 public class FrameFactory {
 	public static Frame getBowlingGameFrame(Integer numberOfFrame) {

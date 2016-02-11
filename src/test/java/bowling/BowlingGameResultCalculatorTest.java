@@ -1,4 +1,4 @@
-package com.capgemini.bowling;
+package bowling;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.capgemini.bowling.BowlingGameResultCalculator;
+import bowling.BowlingGameResultCalculator;
 
 public class BowlingGameResultCalculatorTest {
 
@@ -117,7 +117,7 @@ public class BowlingGameResultCalculatorTest {
 		// then
 		assertEquals(Integer.valueOf(60), result);
 	}
-
+	
 	@Test
 	public void shouldReturn_19_ForEightenRollsZeroAndLastFrameRolls_10_5_4() {
 		// given
@@ -163,6 +163,56 @@ public class BowlingGameResultCalculatorTest {
 
 		// then
 		assertEquals(Integer.valueOf(9), result);
+	}
+
+	@Test
+	public void shouldReturn_28_ForSixtenRollsZeroAndTwoLastFrameRolls_10_5_4() {
+		// given
+		// when
+		for (int i = 0; i < 16; i++) {
+			bowlingGameresultCalculator.roll(Integer.valueOf(0));
+		}
+		bowlingGameresultCalculator.roll(Integer.valueOf(10));
+		bowlingGameresultCalculator.roll(Integer.valueOf(5));
+		bowlingGameresultCalculator.roll(Integer.valueOf(4));
+		Integer result = bowlingGameresultCalculator.score();
+		
+		// then
+		assertEquals(Integer.valueOf(28), result);
+	}
+	
+	@Test
+	public void shouldReturn_21_ForEightenRollsZeroAndTwoLastFrameRolls_9_1_5_1() {
+		// given
+		// when
+		for (int i = 0; i < 16; i++) {
+			bowlingGameresultCalculator.roll(Integer.valueOf(0));
+		}
+		bowlingGameresultCalculator.roll(Integer.valueOf(9));
+		bowlingGameresultCalculator.roll(Integer.valueOf(1));
+		bowlingGameresultCalculator.roll(Integer.valueOf(5));
+		bowlingGameresultCalculator.roll(Integer.valueOf(1));
+		Integer result = bowlingGameresultCalculator.score();
+		
+		// then
+		assertEquals(Integer.valueOf(21), result);
+	}
+	
+	@Test
+	public void shouldReturn_18_ForEightenRollsZeroAndTwoLastFrameRolls_7_2_5_4() {
+		// given
+		// when
+		for (int i = 0; i < 16; i++) {
+			bowlingGameresultCalculator.roll(Integer.valueOf(0));
+		}
+		bowlingGameresultCalculator.roll(Integer.valueOf(7));
+		bowlingGameresultCalculator.roll(Integer.valueOf(2));
+		bowlingGameresultCalculator.roll(Integer.valueOf(5));
+		bowlingGameresultCalculator.roll(Integer.valueOf(4));
+		Integer result = bowlingGameresultCalculator.score();
+		
+		// then
+		assertEquals(Integer.valueOf(18), result);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

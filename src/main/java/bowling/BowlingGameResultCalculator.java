@@ -1,4 +1,4 @@
-package com.capgemini.bowling;
+package bowling;
 
 import java.util.LinkedList;
 

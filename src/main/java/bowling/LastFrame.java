@@ -1,4 +1,4 @@
-package com.capgemini.bowling;
+package bowling;
 
 public class LastFrame implements Frame {
 
@@ -14,14 +14,16 @@ public class LastFrame implements Frame {
 		if (attemps.equals(Integer.valueOf(0))) {
 			firstRoll = numberOfPins;
 		}
-		if (attemps.equals(Integer.valueOf(1))) {
-			secondRoll = numberOfPins;
-		}
-		if (!isStrike() && firstRoll + secondRoll > Integer.valueOf(11)) {
-			throw new IllegalArgumentException("two rolls over 10 in last frame");
-		}
-		if (attemps.equals(Integer.valueOf(2)) && isBonusRoll()) {
-			thirdRoll = numberOfPins;
+		else {
+			if (attemps.equals(Integer.valueOf(1))) {
+				if (firstRoll + numberOfPins > Integer.valueOf(11) && !isStrike()) {
+					throw new IllegalArgumentException("two rolls over 10 in last frame");
+				}
+				secondRoll = numberOfPins;
+			}
+			else {
+				thirdRoll = numberOfPins;
+			}
 		}
 		attemps++;
 	}

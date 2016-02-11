@@ -1,4 +1,4 @@
-package com.capgemini.bowling;
+package bowling;
 
 public class StandardFrame implements Frame {
 
@@ -14,13 +14,12 @@ public class StandardFrame implements Frame {
 		if (attemps.equals(Integer.valueOf(0))) {
 			firstRoll = numberOfPins;
 		}
-		if (attemps.equals(Integer.valueOf(1))) {
+		else {
+			if (firstRoll + numberOfPins > Integer.valueOf(10)) {
+				throw new IllegalArgumentException("sum of two rolls in frame over 10 ");
+			}
 			secondRoll = numberOfPins;
 		}
-		if (firstRoll + secondRoll > Integer.valueOf(10)) {
-			throw new IllegalArgumentException("sum of two rolls in frame over 10 ");
-		}
-		
 		attemps++;		
 	}
 
