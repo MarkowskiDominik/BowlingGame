@@ -22,11 +22,10 @@ public class BowlingGameResultCalculator implements BowlingGameResultCalculatorI
 		if (isFinished()) {
 			throw new IllegalArgumentException("to many rolls");
 		}
-		getCurrentFrame().addScore(numberOfPins);
-		
+		generateCurrentFrame().addScore(numberOfPins);
 	}
 
-	private Frame getCurrentFrame() {
+	private Frame generateCurrentFrame() {
 		Frame currentFrame = bowlingGameFrames.getLast();
 	
 		if (currentFrame.isDone()) {
@@ -34,9 +33,7 @@ public class BowlingGameResultCalculator implements BowlingGameResultCalculatorI
 			currentFrame.setNextFrame(bowlingGameFrames.getLast());
 		}
 		
-		currentFrame = bowlingGameFrames.getLast();
-		
-		return currentFrame;
+		return bowlingGameFrames.getLast();
 	}
 
 	public Integer score() {

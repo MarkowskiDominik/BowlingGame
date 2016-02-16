@@ -57,13 +57,11 @@ public class StandardFrame implements Frame {
 	}
 	
 	public Integer getNextTwoRolls() {
-		if (!isStrike()) {
-			return firstRoll + secondRoll;
-		}
+		Integer sumOfNextTwoRolls = firstRoll + secondRoll;
 		if (isStrike() && nextFrame != null) {
-			return firstRoll + nextFrame.getNextRoll();
+			sumOfNextTwoRolls += nextFrame.getNextRoll();
 		}
-		return firstRoll;
+		return sumOfNextTwoRolls;
 	}
 	
 	public void setNextFrame(Frame nextFrame) {
