@@ -1,20 +1,20 @@
-package bowling;
+package src.main.java.bowling;
 
 public interface Frame {
 
-	public void addScore(Integer numberOfPins);
-	
-	public Integer getScore();
+    public void addScore(Integer numberOfPins);
 
-	public Boolean isDone();
+    public Integer getScore();
 
-	public Boolean isSpare();
-	
-	public Integer getNextRoll();
+    public Boolean isDone();
 
-	public Boolean isStrike();
-	
-	public Integer getNextTwoRolls();
-	
-	public void setNextFrame(Frame frame);
+    public Boolean isSpare();
+
+    public Integer getNextRoll();
+
+    public Boolean isStrike();
+
+    public Integer getNextTwoRolls();
+
+    public void setNextFrame(Frame frame);
 }
