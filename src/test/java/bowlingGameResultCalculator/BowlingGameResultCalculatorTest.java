@@ -1,4 +1,4 @@
-package src.test.java.bowling;
+package bowlingGameResultCalculator;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,10 +6,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.main.java.bowling.BowlingGameResultCalculator;
+import bowlingGameResultCalculator.BowlingGameResultCalculator;
 
 // REVIEW dmarkowski - missing class comment, please add reference to the tested class e.g. {@link
 // BowlingGameResultCalculator}
+/**
+ * @author Dominik Markowski
+ * 
+ * {@link BowlingGameResultCalculator}
+ */
 public class BowlingGameResultCalculatorTest {
 
     private BowlingGameResultCalculator bowlingGameresultCalculator;
@@ -29,7 +34,6 @@ public class BowlingGameResultCalculatorTest {
         // given
         // when
         Integer result = bowlingGameresultCalculator.score();
-
         // then
         assertEquals(Integer.valueOf(0), result);
     }
@@ -218,15 +222,6 @@ public class BowlingGameResultCalculatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void shouldReturn_Exception_ForNullRoll() {
-        // given
-        // when
-        bowlingGameresultCalculator.roll(null);
-
-        // then
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void shouldReturn_Exception_ForRoll_Minus1() {
         // given
         // when
@@ -265,4 +260,18 @@ public class BowlingGameResultCalculatorTest {
 
         // then
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldReturn_Exception_ForRoll_6_6_InLastRound() {
+        // given
+        // when
+        for (int i = 0; i < 18; i++) {
+            bowlingGameresultCalculator.roll(Integer.valueOf(0));
+        }
+        bowlingGameresultCalculator.roll(Integer.valueOf(6));
+        bowlingGameresultCalculator.roll(Integer.valueOf(6));
+
+        // then
+    }
+
 }

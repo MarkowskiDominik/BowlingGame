@@ -1,25 +1,31 @@
-package src.main.java.bowling;
+package frame;
 
 // REVIEW dmarkowski - missing class comment
+/**
+ * @author Dominik Markowski
+ *
+ * Class contains information on rolls in the standard frame and how to calculate the result
+ */
 public class StandardFrame implements Frame {
-    // REVIEW dmarkowski - please use simple types
-    private Integer firstRoll = 0;
-    private Integer secondRoll = 0;
-    private Integer attemps = 0;
+	private static final int ZERO_ATTEMPS = 0;
+    private static final int ONE_ATTEMP = 1;
+    private static final int TWO_ATTEMPS = 2;
+	private static final int MAX_PINS_OF_FRAME = 10;
+    private int firstRoll = 0;
+    private int secondRoll = 0;
+    private int attemps = 0;
     public Frame nextFrame = null;
 
     public StandardFrame() {
     }
 
     @Override
-    public void addScore(Integer numberOfPins) throws IllegalArgumentException {
-        // REVIEW dmarkowski - magic number 0, please extract to a constant and name accordingly
-        if (attemps.equals(Integer.valueOf(0))) {
+    public void addScore(int numberOfPins) throws IllegalArgumentException {
+        if (attemps == ZERO_ATTEMPS) {
             firstRoll = numberOfPins;
         }
         else {
-            // REVIEW dmarkowski - magic number 10, please extract to a constant and name accordingly
-            if (firstRoll + numberOfPins > Integer.valueOf(10)) {
+            if (firstRoll + numberOfPins > MAX_PINS_OF_FRAME) {
                 throw new IllegalArgumentException("sum of two rolls in frame over 10 ");
             }
             secondRoll = numberOfPins;
@@ -29,17 +35,16 @@ public class StandardFrame implements Frame {
 
     @Override
     public Boolean isDone() {
-        // REVIEW dmarkowski - magic numbers 1 and 2, please extract to a constant and name accordingly
-        return (attemps.equals(Integer.valueOf(2)) || attemps.equals(Integer.valueOf(1)) && isStrike());
+        return (attemps == TWO_ATTEMPS || attemps == ONE_ATTEMP && isStrike());
     }
 
     @Override
-    public Integer getScore() {
+    public int getScore() {
         return firstRoll + secondRoll + getBonus();
     }
 
-    private Integer getBonus() {
-        Integer bonusPoint = 0;
+    private int getBonus() {
+        int bonusPoint = 0;
         if (nextFrame != null) {
             if (isSpare()) {
                 bonusPoint = nextFrame.getNextRoll();
@@ -53,24 +58,22 @@ public class StandardFrame implements Frame {
 
     @Override
     public Boolean isSpare() {
-        // REVIEW dmarkowski - magic number 10
-        return (!isStrike() && Integer.valueOf(10).equals(firstRoll + secondRoll));
+        return !isStrike() && firstRoll + secondRoll == MAX_PINS_OF_FRAME;
     }
 
     @Override
-    public Integer getNextRoll() {
+    public int getNextRoll() {
         return firstRoll;
     }
 
     @Override
     public Boolean isStrike() {
-        // REVIEW dmarkowski - magic number 10
-        return (firstRoll.equals(Integer.valueOf(10)));
+        return firstRoll == MAX_PINS_OF_FRAME;
     }
 
     @Override
-    public Integer getNextTwoRolls() {
-        Integer sumOfNextTwoRolls = firstRoll + secondRoll;
+    public int getNextTwoRolls() {
+        int sumOfNextTwoRolls = firstRoll + secondRoll;
         if (isStrike() && nextFrame != null) {
             sumOfNextTwoRolls += nextFrame.getNextRoll();
         }
